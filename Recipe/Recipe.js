@@ -9,7 +9,7 @@ async function generateNewRecipeData(req, res) {
   const { calories, label, totalTime, url, userid, ingredients } = req.body;
 
   try {
-    await Recipe({
+    await Recipe([{
       calories: calories,
       label: label,
       totalTime: totalTime,
@@ -21,7 +21,7 @@ async function generateNewRecipeData(req, res) {
         text: ingredient.text,
       })),
       userid: userid,
-    });
+    }]);
 
     return res.status(200).json({
       label:label,
