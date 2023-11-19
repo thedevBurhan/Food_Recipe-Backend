@@ -15,7 +15,6 @@ async function generateNewRecipeData(req, res) {
       totalTime: totalTime,
       url: url,
       ingredients: ingredients.map((ingredient) => ({
-        food: ingredient.food,
         foodCategory: ingredient.foodCategory,
         quantity: ingredient.quantity,
         text: ingredient.text,
