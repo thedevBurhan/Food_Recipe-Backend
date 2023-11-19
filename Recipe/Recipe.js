@@ -24,8 +24,8 @@ async function generateNewRecipeData(req, res) {
     });
 
     return res.status(200).json({
-      label: recipe.label,
-      ingredients: recipe.ingredients,
+      label:label,
+      ingredients:ingredients,
       message: "Recipe create successful",
       statusCode: 200,
     });
