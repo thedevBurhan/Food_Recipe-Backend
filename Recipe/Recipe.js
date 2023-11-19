@@ -9,7 +9,7 @@ async function generateNewRecipeData(req, res) {
   const { calories, label, totalTime, url, userid, ingredients } = req.body;
 
   try {
-    const recipe = await Recipe.create({
+    await Recipe.create({
       calories: calories,
       label: label,
       totalTime: totalTime,
@@ -18,7 +18,7 @@ async function generateNewRecipeData(req, res) {
         food: ingredient.food,
         foodCategory: ingredient.foodCategory,
         quantity: ingredient.quantity,
-        text: ingredient.text || "", // Use a default value if 'text' is undefined
+        text: ingredient.text,
       })),
       userid: userid,
     });
