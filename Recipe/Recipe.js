@@ -7,12 +7,12 @@ import {
 
 // To Generate Recipe Data
 async function generateNewRecipeData(req, res) {
-  const { calories, label, totalTime, url,text, userid, ingredients } = req.body;
+  const { calories, label, totalTime, url, userid, ingredients } = req.body;
 
   try {
     await Recipe([
       {
-        text:text,
+       
         calories: calories,
         label: label,
         totalTime: totalTime,
@@ -21,6 +21,7 @@ async function generateNewRecipeData(req, res) {
           food: ingredient.food,
           foodCategory: ingredient.foodCategory,
           quantity: ingredient.quantity,
+          text:ingredient.text
         })),
         userid: userid,
       },
