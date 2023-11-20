@@ -12,6 +12,8 @@ const app = express();
 // MiddleWare
 app.use(express.json())
 app.use(cors());
+app.use(bodyParser.json())
+app.use('/uploads', express.static('uploads'))
 // Parse URL-encoded bodies (usually for form data)
 app.use(express.urlencoded({ extended: false }));
 //UserssRouter
