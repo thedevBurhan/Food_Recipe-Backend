@@ -20,7 +20,7 @@ router.get("/allRecipeData", getAllRecipeData);
 // To get Recipe For specific User
 router.get("/specificUser/:id", getSpecificUserRecipeData);
 // To Edit Recipe data
-router.put("/edit/:id", upload.single("image"), updateRecipeDatas);
+router.put("/edit/:id", updateRecipeDatas);
 
 // to delete a Specidic Recipe data
 router.delete("/deleteRecipeData/:id", deleteRecipeDatas);
