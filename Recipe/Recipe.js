@@ -6,6 +6,8 @@ import {
 } from "../Controllers/Controllers-Recipe.js";
 // To Generate Recipe Data
 async function generateNewRecipeData(req, res) {
+  console.log("Request Body:", req.body);
+  console.log("Request File:", req.file);
   const { calories, label, totalTime, userid, ingredients } = req.body;
   const image = req.file;  
   try {
