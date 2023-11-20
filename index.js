@@ -10,7 +10,7 @@ const PORT = process.env.PORT;
 // initialize express server framework
 const app = express();
 // MiddleWare
-app.use(express.json());
+app.use(express.json())
 app.use(cors());
 // Parse URL-encoded bodies (usually for form data)
 app.use(express.urlencoded({ extended: false }));
