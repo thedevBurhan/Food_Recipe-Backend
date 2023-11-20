@@ -7,23 +7,14 @@ import {
   updateRecipeDatas,
 } from "../Recipe/Recipe.js";
 import multer from "multer";
-import path from "path";
+
+const upload = multer({ dest: 'uploads/' })
 //initalize the router
 const router = express.Router();
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "uploads/img/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + path.extname(file.originalname));
-  },
-});
-
-const upload = multer({ storage: storage });
 
 // To add new Recipe Data
-router.post("/", generateNewRecipeData);
+router.post("/",upload.single('image'), generateNewRecipeData);
 // To get all Recipe
 router.get("/allRecipeData", getAllRecipeData);
 // To get Recipe For specific User

@@ -7,14 +7,16 @@ import {
 // To Generate Recipe Data
 async function generateNewRecipeData(req, res) {
   const { calories, label, totalTime, userid, ingredients } = req.body;
-
+  const image = req.file;  
   try {
     await Recipe([{
       calories: calories,
       label: label,
+      image:image,
       totalTime: totalTime,
       ingredients: ingredients.map((ingredient) => ({
-        food: ingredient.food,
+        measure:ingredient.measure,
+        weight: ingredient.weight,
         foodCategory: ingredient.foodCategory,
         quantity: ingredient.quantity,
         text: ingredient.text,
@@ -83,24 +85,10 @@ async function getSpecificUserRecipeData(req, res) {
 async function updateRecipeDatas(req, res) {
   try {
     const { id } = req.params;
-    let images = [];
-
-    if (req.file) {
-      let BASE_URL = `${req.protocol}://${req.get("host")}`;
-      let imageUrl = `${BASE_URL}/img/${req.file.filename}`;
-      images.push({ image: imageUrl });
-    }
-
-    const updateRecipeDataa = {
-      ...req.body,
-      images: images,
-    };
-
+    const updateRecipeDataa=req.body;
     if (!id || !updateRecipeDataa) {
       return res.status(400).json({ data: "Wrong Request" });
     }
-
-    // Assuming updateRecipeData is a function that updates the recipe in your database
     const result = await updateRecipeData(id, updateRecipeDataa);
 
     res.status(200).json({

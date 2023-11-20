@@ -12,7 +12,7 @@ const app = express();
 // MiddleWare
 app.use(express.json());
 app.use(cors());
-
+app.use('/uploads', express.static('uploads'))
 //UserssRouter
 app.use("/users", usersRouter);
 // Recipe
