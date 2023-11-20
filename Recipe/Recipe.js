@@ -3,17 +3,16 @@ import {
   getAllRecipeDatas,
   updateRecipeData,
   deleteRecipeData,
-} from "../Controllers/Controllers-Recipe.js"
+} from "../Controllers/Controllers-Recipe.js";
 // To Generate Recipe Data
 async function generateNewRecipeData(req, res) {
   const { calories, label, totalTime, userid, ingredients } = req.body;
 
   try {
-    await Recipe({
+    await Recipe([{
       calories: calories,
       label: label,
       totalTime: totalTime,
-      url: url,
       ingredients: ingredients.map((ingredient) => ({
         food: ingredient.food,
         foodCategory: ingredient.foodCategory,
@@ -21,7 +20,7 @@ async function generateNewRecipeData(req, res) {
         text: ingredient.text,
       })),
       userid: userid,
-    });
+    }]);
 
     return res.status(200).json({
       label:label,
