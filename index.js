@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
+import bodyParser from "body-parser";
 import { usersRouter } from "./Routers/Routers-User.js";
 import { isAuthenticated } from "./Authentication/Auth.js";
 import { RecipedataRouter } from "./Routers/Routers-Recipe.js";
