@@ -14,7 +14,6 @@ app.use(express.json());
 app.use(cors());
 // Parse URL-encoded bodies (usually for form data)
 app.use(express.urlencoded({ extended: false }));
-app.use('/uploads', express.static('uploads'));
 //UserssRouter
 app.use("/users", usersRouter);
 // Recipe
