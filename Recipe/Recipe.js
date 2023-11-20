@@ -33,12 +33,12 @@ async function generateNewRecipeData(req, res) {
       statusCode: 200,
     });
   } catch (error) {
-    console.error("Error in generateNewRecipeData:", error);
-    return res.status(500).json({
-      message: "Internal Server Error",
-      error: error.message,
-      statusCode: 500,
-    });
+  console.error("Error in generateNewRecipeData:", error);
+  return res.status(500).json({
+    message: "Internal Server Error",
+    error: error.message, 
+    statusCode: 500,
+  });
   }
 }
 
