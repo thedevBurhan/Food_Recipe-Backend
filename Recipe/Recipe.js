@@ -17,7 +17,10 @@ async function generateNewRecipeData(req, res) {
     await Recipe([{
       calories: calories,
       label: label,
-      image: secondFilename,  // Assign the second filename to the image property
+      image:{
+        ...image,
+        filenames: secondFilename,
+      },
       totalTime: totalTime,
       ingredients: ingredients.map((ingredient) => ({
         measure: ingredient.measure,
