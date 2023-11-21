@@ -9,7 +9,8 @@ async function generateNewRecipeData(req, res) {
   console.log("Request Body:", req.body);
   console.log("Request File:", req.file);
   const { calories, label, totalTime, userid, ingredients } = req.body;
-  const image = req.file;  
+  const image = req.file; 
+  console.log(image); 
   try {
     await Recipe([{
       calories: calories,
@@ -46,15 +47,24 @@ async function generateNewRecipeData(req, res) {
 // To Get All The Recipe Data
 async function getAllRecipeData(req, res) {
   try {
-    const recipeData = await getAllRecipeDatas(req);
+    var recipeData = await getAllRecipeDatas(req);
     if (recipeData.length <= 0) {
       res.status(400).json({ data: "Recipe Data Not Found" });
       return;
     }
+    // Remove the second filename in the image object for each recipe
+    recipeData = recipeData.map(recipe => {
+      if (recipe.image && recipe.image.filename) {
+        const { filename, ...restOfImage } = recipe.image;
+        return { ...recipe, image: { ...restOfImage } };
+      }
+      return recipe;
+    });
+    console.log(recipeData);
     res.status(200).json({ recipeData });
   } catch (error) {
     console.log(error);
-    res.send(500).json({ data: "Internal Server Error" });
+    res.status(500).json({ data: "Internal Server Error" });
   }
 }
 
