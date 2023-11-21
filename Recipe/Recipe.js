@@ -6,19 +6,21 @@ import {
 } from "../Controllers/Controllers-Recipe.js";
 // To Generate Recipe Data
 async function generateNewRecipeData(req, res) {
-  console.log("Request Body:", req.body);
-  console.log("Request File:", req.file);
   const { calories, label, totalTime, userid, ingredients } = req.body;
   const image = req.file; 
-  console.log(image); 
+  console.log("image", image); 
   try {
+    // Use the entire filename if there is no comma
+    const secondFilename = image.filename.includes(',') ? image.filename.split(',')[1] : image.filename;
+    console.log("secondFilename", secondFilename);
+
     await Recipe([{
       calories: calories,
       label: label,
-      image:image,
+      image: secondFilename,  // Assign the second filename to the image property
       totalTime: totalTime,
       ingredients: ingredients.map((ingredient) => ({
-        measure:ingredient.measure,
+        measure: ingredient.measure,
         weight: ingredient.weight,
         foodCategory: ingredient.foodCategory,
         quantity: ingredient.quantity,
@@ -28,18 +30,18 @@ async function generateNewRecipeData(req, res) {
     }]);
 
     return res.status(200).json({
-      label:label,
-      ingredients:ingredients,
+      label: label,
+      ingredients: ingredients,
       message: "Recipe create successful",
       statusCode: 200,
     });
   } catch (error) {
-  console.error("Error in generateNewRecipeData:", error);
-  return res.status(500).json({
-    message: "Internal Server Error",
-    error: error.message, 
-    statusCode: 500,
-  });
+    console.error("Error in generateNewRecipeData:", error);
+    return res.status(500).json({
+      message: "Internal Server Error",
+      error: error.message, 
+      statusCode: 500,
+    });
   }
 }
 
